@@ -3,6 +3,8 @@
 
 import * as React from 'react'
 
+import '@emotion/core'
+
 import {
   StyledComponent,
   StyledOptions,
@@ -16,17 +18,19 @@ export interface ThemeProviderProps<Theme> {
   children?: React.ReactNode
 }
 
-export interface ThemeProvider<Theme extends {} = any> {
+export interface ThemeProvider<Theme extends {} = Emotion.Theme> {
   (props: ThemeProviderProps<Theme>): React.ReactElement
 }
 
-export type withTheme<Theme extends {} = any> = <
+export type withTheme<Theme extends {} = Emotion.Theme> = <
   C extends React.ComponentType<React.ComponentProps<C>>
 >(
   component: C
 ) => React.FC<DistributiveOmit<PropsOf<C>, 'theme'> & { theme?: Theme }>
 
-export type useTheme<Theme extends {} = any> = <T extends Theme = Theme>() => T
+export type useTheme<Theme extends {} = Emotion.Theme> = <
+  T extends Theme = Theme
+>() => T
 
 export const ThemeProvider: ThemeProvider
 
