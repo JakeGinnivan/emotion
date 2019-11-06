@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 
-import '@emotion/core'
+import { AnyIfEmpty } from '@emotion/core'
 
 import {
   StyledComponent,
@@ -18,17 +18,17 @@ export interface ThemeProviderProps<Theme> {
   children?: React.ReactNode
 }
 
-export interface ThemeProvider<Theme extends {} = Emotion.Theme> {
+export interface ThemeProvider<Theme extends {} = AnyIfEmpty<Emotion.Theme>> {
   (props: ThemeProviderProps<Theme>): React.ReactElement
 }
 
-export type withTheme<Theme extends {} = Emotion.Theme> = <
+export type withTheme<Theme extends {} = AnyIfEmpty<Emotion.Theme>> = <
   C extends React.ComponentType<React.ComponentProps<C>>
 >(
   component: C
 ) => React.FC<DistributiveOmit<PropsOf<C>, 'theme'> & { theme?: Theme }>
 
-export type useTheme<Theme extends {} = Emotion.Theme> = <
+export type useTheme<Theme extends {} = AnyIfEmpty<Emotion.Theme>> = <
   T extends Theme = Theme
 >() => T
 

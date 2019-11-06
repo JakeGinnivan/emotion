@@ -24,6 +24,8 @@ export {
   ObjectInterpolation
 } from '@emotion/css'
 
+export type AnyIfEmpty<T extends object> = keyof T extends never ? any : T
+
 export { EmotionCache, Interpolation, SerializedStyles, css }
 
 export const ThemeContext: Context<object>
@@ -45,7 +47,7 @@ export interface GlobalProps<Theme> {
  * @desc
  * JSX generic are supported only after TS@2.9
  */
-export function Global<Theme extends {} = Emotion.Theme>(
+export function Global<Theme extends {} = AnyIfEmpty<Emotion.Theme>>(
   props: GlobalProps<Theme>
 ): ReactElement
 
@@ -77,13 +79,13 @@ export interface ClassNamesProps<Theme> {
  * @desc
  * JSX generic are supported only after TS@2.9
  */
-export function ClassNames<Theme extends {} = Emotion.Theme>(
+export function ClassNames<Theme extends {} = AnyIfEmpty<Emotion.Theme>>(
   props: ClassNamesProps<Theme>
 ): ReactElement
 
 declare module 'react' {
   interface DOMAttributes<T> {
-    css?: InterpolationWithTheme<Emotion.Theme>
+    css?: InterpolationWithTheme<AnyIfEmpty<Emotion.Theme>>
   }
 }
 
@@ -100,7 +102,7 @@ declare global {
      */
 
     interface IntrinsicAttributes {
-      css?: InterpolationWithTheme<Emotion.Theme>
+      css?: InterpolationWithTheme<AnyIfEmpty<Emotion.Theme>>
     }
   }
 }

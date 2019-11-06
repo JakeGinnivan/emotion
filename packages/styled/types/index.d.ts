@@ -1,7 +1,7 @@
 // Definitions by: Junyoung Clare Jang <https://github.com/Ailrun>
 // TypeScript Version: 2.9
 
-import '@emotion/core'
+import { AnyIfEmpty } from '@emotion/core'
 
 import {
   CreateStyled as BaseCreateStyled,
@@ -20,7 +20,7 @@ export {
   CreateStyledComponent
 } from '@emotion/styled-base'
 
-export type StyledTags<Theme extends {} = Emotion.Theme> = {
+export type StyledTags<Theme extends {} = AnyIfEmpty<Emotion.Theme>> = {
   [Tag in keyof JSX.IntrinsicElements]: CreateStyledComponent<
     { theme?: Theme },
     JSX.IntrinsicElements[Tag],
@@ -28,7 +28,7 @@ export type StyledTags<Theme extends {} = Emotion.Theme> = {
   >
 }
 
-export interface CreateStyled<Theme extends {} = Emotion.Theme>
+export interface CreateStyled<Theme extends {} = AnyIfEmpty<Emotion.Theme>>
   extends BaseCreateStyled<Theme>,
     StyledTags<Theme> {}
 
