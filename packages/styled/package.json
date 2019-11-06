@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": "https://github.com/emotion-js/emotion/tree/master/packages/styled",
   "scripts": {
-    "test:typescript": "dtslint types"
+    "test:typescript": "dtslint types && dtslint types-tests-global-theme"
   },
   "dependencies": {
     "@emotion/styled-base": "^11.0.0-next.0",

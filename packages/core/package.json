@@ -16,7 +16,7 @@
   "author": "mitchellhamilton <mitchell@mitchellhamilton.me>",
   "license": "MIT",
   "scripts": {
-    "test:typescript": "dtslint types"
+    "test:typescript": "dtslint types && dtslint types-tests-global-theme"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",

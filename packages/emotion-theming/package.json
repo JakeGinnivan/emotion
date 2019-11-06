@@ -11,7 +11,7 @@
     "types"
   ],
   "scripts": {
-    "test:typescript": "dtslint types"
+    "test:typescript": "dtslint types && dtslint types-tests-global-theme"
   },
   "repository": "https://github.com/emotion-js/emotion/tree/master/packages/emotion-theming",
   "keywords": [
