@@ -24,8 +24,6 @@ export {
   ObjectInterpolation
 } from '@emotion/css'
 
-export type AnyIfEmpty<T extends object> = keyof T extends never ? any : T
-
 export { EmotionCache, Interpolation, SerializedStyles, css }
 
 export const ThemeContext: Context<object>
@@ -36,20 +34,15 @@ export function withEmotionCache<Props, RefType = any>(
 
 export const jsx: typeof createElement
 
-export type InterpolationWithTheme<Theme> =
-  | Interpolation
-  | ((theme: Theme) => Interpolation)
-
-export interface GlobalProps<Theme> {
-  styles: InterpolationWithTheme<Theme>
+export interface GlobalProps {
+  styles: Interpolation
 }
+
 /**
  * @desc
  * JSX generic are supported only after TS@2.9
  */
-export function Global<Theme extends {} = AnyIfEmpty<Emotion.Theme>>(
-  props: GlobalProps<Theme>
-): ReactElement
+export function Global(props: GlobalProps): ReactElement
 
 export function keyframes(
   template: TemplateStringsArray,
@@ -66,26 +59,24 @@ export type ClassNamesArg =
   | { [className: string]: boolean | null | undefined }
   | ArrayClassNamesArg
 
-export interface ClassNamesContent<Theme> {
+export interface ClassNamesContent {
   css(template: TemplateStringsArray, ...args: Array<Interpolation>): string
   css(...args: Array<Interpolation>): string
   cx(...args: Array<ClassNamesArg>): string
-  theme: Theme
+  theme: Emotion.Theme
 }
-export interface ClassNamesProps<Theme> {
-  children(content: ClassNamesContent<Theme>): ReactNode
+export interface ClassNamesProps {
+  children(content: ClassNamesContent): ReactNode
 }
 /**
  * @desc
  * JSX generic are supported only after TS@2.9
  */
-export function ClassNames<Theme extends {} = AnyIfEmpty<Emotion.Theme>>(
-  props: ClassNamesProps<Theme>
-): ReactElement
+export function ClassNames(props: ClassNamesProps): ReactElement
 
 declare module 'react' {
   interface DOMAttributes<T> {
-    css?: InterpolationWithTheme<AnyIfEmpty<Emotion.Theme>>
+    css?: Interpolation
   }
 }
 
@@ -102,7 +93,7 @@ declare global {
      */
 
     interface IntrinsicAttributes {
-      css?: InterpolationWithTheme<AnyIfEmpty<Emotion.Theme>>
+      css?: Interpolation
     }
   }
 }
