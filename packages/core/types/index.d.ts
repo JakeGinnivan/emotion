@@ -35,7 +35,7 @@ export function withEmotionCache<Props, RefType = any>(
 export const jsx: typeof createElement
 
 export interface GlobalProps {
-  styles: Interpolation
+  styles: Interpolation<Emotion.Theme>
 }
 
 /**
